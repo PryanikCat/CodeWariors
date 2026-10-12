@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070912">
+<title>TaskFlow — список задач</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Анимированный фон -->
+<div class="bg" aria-hidden="true">
+  <span class="bg__orb bg__orb--1"></span>
+  <span class="bg__orb bg__orb--2"></span>
+  <span class="bg__orb bg__orb--3"></span>
+</div>
+
+<main class="app">
+
+  <!-- Шапка -->
+  <header class="header">
+    <div class="brand">
+      <div class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand__name">Task<span>Flow</span></h1>
+        <p class="brand__tagline">Управляй своим днём</p>
+      </div>
+    </div>
+    <div class="date" id="today"></div>
+  </header>
+
+  <!-- Прогресс -->
+  <section class="progress">
+    <div class="progress__top">
+      <span class="progress__label" id="progressLabel">Прогресс дня</span>
+      <span class="progress__percent" id="progressPercent">0%</span>
+    </div>
+    <div class="progress__track">
+      <div class="progress__fill" id="progressBar"></div>
+    </div>
+  </section>
+
+  <!-- Добавление задачи -->
+  <form class="composer" id="composer" autocomplete="off">
+    <div class="composer__field">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <input id="taskInput" type="text" placeholder="Что нужно сделать?" maxlength="140" aria-label="Новая задача">
+    </div>
+
+    <select id="prioritySelect" class="select" aria-label="Приоритет">
+      <option value="low">Низкий</option>
+      <option value="medium" selected>Средний</option>
+      <option value="high">Высокий</option>
+    </select>
+
+    <button class="btn-add" type="submit" aria-label="Добавить задачу">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </form>
+
+  <!-- Панель фильтров и поиска -->
+  <div class="toolbar">
+    <div class="filters" role="tablist">
+      <button class="filter is-active" data-filter="all" type="button">Все</button>
+      <button class="filter" data-filter="active" type="button">Активные</button>
+      <button class="filter" data-filter="done" type="button">Готовые</button>
+    </div>
+
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+        <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input id="searchInput" type="search" placeholder="Поиск..." aria-label="Поиск по задачам">
+    </div>
+  </div>
+
+  <!-- Список задач -->
+  <ul class="tasks" id="taskList"></ul>
+
+  <!-- Пустое состояние -->
+  <div class="empty" id="emptyState" hidden>
+    <div class="empty__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <p class="empty__title" id="emptyTitle">Список пуст</p>
+    <p class="empty__text" id="emptyText">Добавьте первую задачу — и начнём!</p>
+  </div>
+
+  <!-- Подвал -->
+  <footer class="footer">
+    <span id="counter">Задач пока нет</span>
+    <button class="footer__clear" id="clearCompleted" type="button">Очистить выполненные</button>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
